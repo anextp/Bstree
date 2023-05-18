@@ -1,0 +1,73 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] a = {1,3,6,5,9,8};
+        System.out.println(isMinHeap(a));
+    }
+
+    public static boolean isMinHeap(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if ((2 * i) < arr.length) {
+                if (arr[2 * i] < arr[i])
+                    return false;
+
+                if ((2 * i + 1) < arr.length) {
+                    if (arr[2 * i + 1] < arr[i])
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public static void convertToMin(int[] arr, int index){
+        int theoMaxInd = arr.length;
+        if(index < arr.length && arr[index] > arr[theoMaxInd]){
+            int temp = arr[index];
+            arr[index] = arr[theoMaxInd];
+            arr[theoMaxInd] = temp;
+        }
+
+    }
+
+
+    public static Set<Character> intersect(String str1, String str2 ){
+        Set<Character> str1Set = new HashSet<Character>();
+        char[] c1 = str1.toCharArray();
+        for(int i = 0; i< c1.length; i++){
+            str1Set.add(c1[i]);
+        }
+        char[] c2 = str2.toCharArray();
+        Set<Character> res = new HashSet<Character>();
+        for(int i = 0; i< c2.length; i++){
+            if (str1Set.contains(c2[i]))
+                    res.add(c2[i]);
+        }
+        return res;
+    }
+    public static void anagram(String... args){
+        for(int i = 0; i< args.length;i++){
+            HashSet<String> set = new HashSet<>();
+            set.add(args[i]);
+            HashSet<Character> h = new HashSet<>();
+            char[] carr = args[i].toCharArray();
+            for(char c : carr)
+                h.add(c);
+            for(int j = i; j < args.length;j++){
+                Set<Character> res = intersect(args[i], args[j]);
+                if(res.size() == h.size())
+                    set.add(args[j]);
+            }
+            System.out.println(set);
+        }
+
+            }
+        }
+    }
+}
